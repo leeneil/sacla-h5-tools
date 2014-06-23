@@ -1,13 +1,20 @@
 % example:
-% exploreh5('207829_0.h5', [1])
+% exploreh5('207829_0.h5', [])
 
-function exploreh5(filename, path)
+function exploreh5(filename, varargin)
 
 
 % read h5 info
 if ~exist('info', 'var')
     global info;
     info = h5info(filename);
+end
+
+% set default path
+if isempty(varargin)
+    path = [];
+else
+    path = varargin{1};
 end
 
 indent = '';
