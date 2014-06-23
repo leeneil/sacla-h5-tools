@@ -20,9 +20,9 @@ for d = 1:length(detectors)
     info.Groups(2).Groups(d).Groups(2).Datasets(1).Dataspace.Size(2),...
     ( length(info.Groups(2).Groups(d).Groups)-1 ) );
     for t = 1:length(tags)
-        disp(['loading tag #' int2str(t)]);
-        data(:,:,tags(t)) = h5read(filename, [info.Groups(2).Groups(d).Groups(tags(t+1)).Name ...
-            '/' info.Groups(2).Groups(d).Groups(tags(t+1)).Datasets(1).Name]);
+        disp(['loading tag #' int2str( tags(t)+1 )]);
+        data(:,:,tags(t)) = h5read(filename, [info.Groups(2).Groups(d).Groups( tags(t)+1 ).Name ...
+            '/' info.Groups(2).Groups(d).Groups( tags(t)+1 ).Datasets(1).Name]);
     end
     save( [filename(1:(end-3)) '_d' int2str(d)], 'data');
 end
