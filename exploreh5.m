@@ -1,8 +1,11 @@
 % example:
-% info = h5infor('207829_0.h5');
-% exploreh5('207829_0.h5', info, [1])
+% exploreh5('207829_0.h5', [1])
 
-function exploreh5(filename, info, path)
+function exploreh5(filename, path)
+
+
+% read h5 info
+info = h5info(filename);
 
 indent = '';
 
