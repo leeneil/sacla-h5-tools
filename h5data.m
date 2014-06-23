@@ -5,7 +5,7 @@ info = h5info(filename);
 
 % handle additional arguments
 detectors = 1:2;
-tags = 2:length(info.Groups(2).Groups(1).Groups);
+tags = 1:( length(info.Groups(2).Groups(1).Groups) - 1);
 if ~isempty(varargin)
     detectors = varargin{1};
     if length(varargin) > 1
@@ -21,8 +21,8 @@ for d = detectors
     ( length(info.Groups(2).Groups(d).Groups)-1 ) );
     for t = tags
         disp(['loading tag #' int2str(t)]);
-        data(:,:,t-1) = h5read(filename, [info.Groups(2).Groups(d).Groups(t).Name ...
-            '/' info.Groups(2).Groups(d).Groups(t).Datasets(1).Name]);
+        data(:,:,t) = h5read(filename, [info.Groups(2).Groups(d).Groups(t+1).Name ...
+            '/' info.Groups(2).Groups(d).Groups(t+1).Datasets(1).Name]);
     end
     save( [filename(1:(end-3)) '_d' int2str(d)], 'data');
 end
