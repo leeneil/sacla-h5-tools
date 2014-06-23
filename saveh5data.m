@@ -14,15 +14,7 @@ if ~isempty(varargin)
 end
 
 for d = 1:length(detectors)
-    disp(['========== detector ' int2str(d) ' ==========']);
-    % pre-allocate memory space
-    data = zeros( info.Groups(2).Groups(d).Groups(2).Datasets(1).Dataspace.Size(1),...
-    info.Groups(2).Groups(d).Groups(2).Datasets(1).Dataspace.Size(2),...
-    ( length(info.Groups(2).Groups(d).Groups)-1 ) );
-    for t = 1:length(tags)
-        disp(['loading tag #' int2str( tags(t)+1 )]);
-        data(:,:,tags(t)) = h5read(filename, [info.Groups(2).Groups(d).Groups( tags(t)+1 ).Name ...
-            '/' info.Groups(2).Groups(d).Groups( tags(t)+1 ).Datasets(1).Name]);
-    end
-    save( [filename(1:(end-3)) '_d' int2str(d)], 'data');
+    data = h5data(filename, detectors(d), tags);
+    disp('saving data');
+    save( [filename(1:(end-3)) '_d' int2str( detectors(d) )], 'data');
 end
