@@ -5,7 +5,10 @@ function exploreh5(filename, path)
 
 
 % read h5 info
-info = h5info(filename);
+if ~exist('info', 'var')
+    global info;
+    info = h5info(filename);
+end
 
 indent = '';
 
@@ -25,7 +28,7 @@ disp(num_path);
 eval(['glg = length(info' cur_path '.Groups);']);
 if glg > 0
     for t = 1:glg
-        exploreh5(filename, info, [path t]);
+        exploreh5(filename, [path t]);
     end
 else
     eval(['disp( [indent info' cur_path '.Name ]);']);
